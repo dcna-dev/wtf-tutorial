@@ -1,0 +1,4 @@
+wtf_env/
+*.cfg
+*.pyc
+.gitignore
