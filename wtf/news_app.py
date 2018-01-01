@@ -2,6 +2,8 @@
 from os import path
 from flask import Flask
 from .blueprints.noticias import noticias_blueprint
+from flask_bootstrap import Bootstrap
+from db import db
 
 def create_app(mode):
     instance_path = path.join(
@@ -22,7 +24,8 @@ def create_app(mode):
     )
 
     app.register_blueprint(noticias_blueprint)
-
+    Bootstrap(app)
+    db.init_app(app)
     return app
 
 

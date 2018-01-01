@@ -1,14 +1,21 @@
-<html>
-  <head>
-    <title>{% block title %} {{title or "Notícias"}} {% endblock %}</title>
-  </head>
-  <body>
-    <img src="{{url_for('static', filename='generic_logo.gif')}}">
-    <nav>
-      <a href="{{url_for('noticias.index')}}">HOME</a> | <a href="{{url_for('noticias.cadastro')}}">CADASTRO</a>
+{%- extends "bootstrap/base.html" %}
+{% import "bootstrap/utils.html" as utils %}
+{% block title %} {{title or "Notícias"}} {% endblock %}
+{% block navbar -%}
+    <nav class="navbar navbar-default">
+        <a class="navbar-brand" href="#"><img src="{{url_for('static', filename='generic_logo.gif')}}" style="height:30px;"></a>
+        <ul class="nav navbar-nav">
+            <li><a href="{{url_for('noticias.index')}}">HOME</a></li>
+            <li><a href="{{url_for('noticias.cadastro')}}">CADASTRO</a></li>
+        <ul>
     </nav>
-    <hr />
-    {% block content %} {% endblock %}
-  </body>
-</html>
+{%- endblock navbar %}
+
+
+{% block content %}
+    <div class="container">
+        {% block news %}
+        {% endblock %}
+    </div>
+{%- endblock content %}
 
