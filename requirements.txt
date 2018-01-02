@@ -4,3 +4,5 @@ nose
 Flask-Bootstrap
 flask-mongoengine
 Flask-Security
+Flask-Login==0.2.11
+Flask-Admin

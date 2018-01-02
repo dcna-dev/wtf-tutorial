@@ -4,8 +4,9 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_security import Security, MongoEngineUserDatastore
 
+from .admin import configure_admin
 from .blueprints.noticias import noticias_blueprint
-from db import db
+from .db import db
 from .security_models import User, Role
 
 def create_app(mode):
@@ -30,6 +31,7 @@ def create_app(mode):
     Bootstrap(app)
     db.init_app(app)
     Security(app=app, datastore=MongoEngineUserDatastore(db, User, Role))
+    configure_admin(app)
     return app
 
 

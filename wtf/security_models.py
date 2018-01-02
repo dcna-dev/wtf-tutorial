@@ -1,8 +1,8 @@
 # coding: utf-8
-
 from .db import db
 from flask_security import UserMixin, RoleMixin
 from flask_security.utils import encrypt_password
+
 
 class Role(db.Document, RoleMixin):
 
@@ -12,9 +12,10 @@ class Role(db.Document, RoleMixin):
     @classmethod
     def createrole(cls, name, description=None):
         return cls.objects.create(
-                name=name,
-                description=description
+            name=name,
+            description=description
         )
+
 
 class User(db.Document, UserMixin):
     name = db.StringField(max_length=255)
@@ -32,7 +33,9 @@ class User(db.Document, UserMixin):
     login_count = db.IntField()
 
     @classmethod
-    def createuser(cls, name, email, password, active=True, roles=None, username=None, *args, **kwargs):
+    def createuser(cls, name, email, password,
+                   active=True, roles=None, username=None,
+                   *args, **kwargs):
         return cls.objects.create(
             name=name,
             email=email,
@@ -43,4 +46,3 @@ class User(db.Document, UserMixin):
             *args,
             **kwargs
         )
-
