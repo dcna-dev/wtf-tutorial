@@ -1,9 +1,12 @@
 # coding utf-8
 from os import path
 from flask import Flask
-from .blueprints.noticias import noticias_blueprint
 from flask_bootstrap import Bootstrap
+from flask_security import Security, MongoEngineUserDatastore
+
+from .blueprints.noticias import noticias_blueprint
 from db import db
+from .security_models import User, Role
 
 def create_app(mode):
     instance_path = path.join(
@@ -26,6 +29,7 @@ def create_app(mode):
     app.register_blueprint(noticias_blueprint)
     Bootstrap(app)
     db.init_app(app)
+    Security(app=app, datastore=MongoEngineUserDatastore(db, User, Role))
     return app
 
 
