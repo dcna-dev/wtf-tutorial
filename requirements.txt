@@ -1,8 +1,10 @@
 flask
-Ipython==5.0
+flask-mongoengine
 nose
 Flask-Bootstrap
-flask-mongoengine
 Flask-Security
 Flask-Login==0.2.11
 Flask-Admin
+flask-debugtoolbar
+flask-cache
+pymongo==3.5.1

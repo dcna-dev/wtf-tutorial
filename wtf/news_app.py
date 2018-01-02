@@ -3,11 +3,13 @@ from os import path
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_security import Security, MongoEngineUserDatastore
+from flask_debugtoolbar import DebugToolbarExtension
 
 from .admin import configure_admin
 from .blueprints.noticias import noticias_blueprint
 from .db import db
 from .security_models import User, Role
+from .cache import cache
 
 def create_app(mode):
     instance_path = path.join(
@@ -32,6 +34,8 @@ def create_app(mode):
     db.init_app(app)
     Security(app=app, datastore=MongoEngineUserDatastore(db, User, Role))
     configure_admin(app)
+    DebugToolbarExtension(app)
+    cache.init_app(app)
     return app
 
 
