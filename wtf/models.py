@@ -6,5 +6,6 @@ class Noticia(db.Document):
     titulo = db.StringField()
     texto = db.StringField()
     imagem = db.StringField()
+    slug_titulo = db.StringField()
 
 

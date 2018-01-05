@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block title %}
-    Notícia {{id_nova_noticia}} inserida com sucesso
+    Notícia " {{titulo}} " inserida com sucesso
 {% endblock %}
 
 {% block news %}
-  <h1>Notícia {{id_nova_noticia}} inserida com sucesso!</h1>
-  <a href="{{url_for('noticias.noticia', noticia_id=id_nova_noticia)}}"> Ler Notícia </a><br />
+  <h1>Notícia " {{titulo}} " inserida com sucesso!</h1>
+  <a href="{{url_for('noticias.noticia', slug_titulo=slug_titulo)}}"> Ler Notícia </a><br />
   <a href="{{url_for('noticias.cadastro')}}"> Cadastrar nova notícia </a>
 {% endblock %}

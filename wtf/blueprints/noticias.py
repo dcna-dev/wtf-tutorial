@@ -6,6 +6,8 @@ from flask import (
         Blueprint, request, current_app,
         send_from_directory, render_template
     )
+from slugify import slugify
+
 from ..models import Noticia
 from flask_security import login_required # decorator
 from ..cache import cache
@@ -25,7 +27,9 @@ def cadastro():
             imagem.save(path)
             dados_do_formulario['imagem'] = filename
         nova_noticia = Noticia.objects.create(**dados_do_formulario)
-        return render_template('cadastro_sucesso.html', id_nova_noticia=nova_noticia.id)
+        nova_noticia.slug_titulo = slugify(nova_noticia.titulo, to_lower=True)
+        nova_noticia.save()
+        return render_template('cadastro_sucesso.html', titulo=nova_noticia.titulo, slug_titulo=nova_noticia.slug_titulo)
 
     return render_template('cadastro.html', title=u"Inserir nova noticia")
 
@@ -38,14 +42,14 @@ def index():
                             noticias=todas_as_noticias,
                             title=u"Todas as notícias")
 
-@noticias_blueprint.route("/noticia/<noticia_id>")
-def noticia(noticia_id):
-    noticia_cacheada = cache.get(noticia_id)
+@noticias_blueprint.route("/noticia/<slug_titulo>")
+def noticia(slug_titulo):
+    noticia_cacheada = cache.get(slug_titulo)
     if noticia_cacheada:
         noticia = noticia_cacheada
     else:
-        noticia = Noticia.objects.get(id=noticia_id)
-        cache.set(noticia_id, noticia, timeout=300)
+        noticia = Noticia.objects.get(slug_titulo=slug_titulo)
+        cache.set(slug_titulo, noticia, timeout=300)
     return render_template('noticia.html', noticia=noticia)
 
 @noticias_blueprint.route('/media/<path:filename>')

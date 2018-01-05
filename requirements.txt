@@ -9,3 +9,4 @@ flask-debugtoolbar
 flask-cache
 pymongo==3.5.1
 flask_simple_sitemap
+awesome-slugify

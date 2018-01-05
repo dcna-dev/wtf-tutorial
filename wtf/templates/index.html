@@ -4,7 +4,7 @@
   <ul>
     {% for noticia in noticias %}
     <li>
-        <a href="{{url_for('noticias.noticia', noticia_id=noticia.id)}}">
+        <a href="{{url_for('noticias.noticia', slug_titulo=noticia.slug_titulo)}}">
             {{noticia.titulo}}
     </li>
     {% endfor %}
