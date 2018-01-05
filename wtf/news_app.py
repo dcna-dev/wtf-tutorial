@@ -41,7 +41,7 @@ def create_app(mode):
     cache.init_app(app)
 
     app.config['SIMPLE_SITEMAP_PATHS'] = {
-            '/noticia/{0}'.format(noticia.id): {}
+            '/noticia/{0}'.format(noticia.slug_titulo): {}
             for noticia in Noticia.objects.all()
     }
     sitemap = SimpleSitemap(app)
