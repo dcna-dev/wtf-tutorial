@@ -41,7 +41,9 @@ def create_app(mode):
     cache.init_app(app)
 
     app.config['SIMPLE_SITEMAP_PATHS'] = {
-            '/noticia/{0}'.format(noticia.slug_titulo): {}
+            '/noticia/{0}'.format(noticia.slug_titulo): {
+                'lastmod': noticia.modified.strftime('%Y-%m-%d')
+            }
             for noticia in Noticia.objects.all()
     }
     sitemap = SimpleSitemap(app)
