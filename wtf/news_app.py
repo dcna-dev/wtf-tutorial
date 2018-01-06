@@ -1,4 +1,5 @@
 # coding utf-8
+import re
 from os import path
 from flask import Flask
 from flask_bootstrap import Bootstrap
@@ -46,6 +47,10 @@ def create_app(mode):
             }
             for noticia in Noticia.objects.all()
     }
+    app.config['SIMPLE_SITEMAP_EXCLUDE'] = [
+            '^/admin/.*',
+            '^/log'
+            ]
     sitemap = SimpleSitemap(app)
     return app
 
