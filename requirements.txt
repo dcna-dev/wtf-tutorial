@@ -1,4 +1,5 @@
 flask
 Ipython==5.0
 dataset
+nose
 
